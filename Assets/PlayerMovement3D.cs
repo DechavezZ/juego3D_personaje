@@ -2,11 +2,14 @@ using UnityEngine;
 
 public class PlayerMovement3D : MonoBehaviour
 {
-    public float speed = 5f;
+    public float forwardSpeed = 8f;
+
+    public float sideSpeed = 5f;
+
     public float jumpForce = 5f;
-    public float forwardSpeed = 5f;
 
     private Rigidbody rb;
+
     private float timer = 0f;
 
     void Start()
@@ -19,27 +22,35 @@ public class PlayerMovement3D : MonoBehaviour
         // Movimiento lateral
         float moveX = Input.GetAxis("Horizontal");
 
+        // Movimiento automático hacia adelante
         Vector3 velocity = rb.linearVelocity;
 
-        velocity.x = moveX * speed;
+        velocity.x = moveX * sideSpeed;
 
-        // Movimiento automático hacia adelante
         velocity.z = forwardSpeed;
 
-        rb.linearVelocity = velocity;
+        rb.linearVelocity = new Vector3(
+            velocity.x,
+            rb.linearVelocity.y,
+            velocity.z
+        );
 
         // Salto
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rb.AddForce(
+                Vector3.up * jumpForce,
+                ForceMode.Impulse
+            );
         }
 
-        // Sistema de score
+        // Score automático
         timer += Time.deltaTime;
 
         if (timer >= 1f)
         {
-            GameManager gm = FindFirstObjectByType<GameManager>();
+            GameManager gm =
+                FindFirstObjectByType<GameManager>();
 
             if (gm != null)
             {
@@ -48,8 +59,5 @@ public class PlayerMovement3D : MonoBehaviour
 
             timer = 0f;
         }
-
-        // Dificultad progresiva
-        forwardSpeed += Time.deltaTime * 0.05f;
     }
 }

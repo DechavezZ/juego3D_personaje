@@ -1,0 +1,47 @@
+# =========================
+# Unity generated folders
+# =========================
+
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+
+# =========================
+# Visual Studio / Rider
+# =========================
+
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+
+# =========================
+# Unity cache
+# =========================
+
+.gradle/
+.utmp/
+
+# =========================
+# APK / Exported builds
+# =========================
+
+*.apk
+*.aab
+
+# =========================
+# OS files
+# =========================
+
+.DS_Store
+Thumbs.db

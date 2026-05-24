@@ -571,7 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d15239147e1d744791658b868a9d1c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement3D
-  forwardSpeed: 5
+  forwardSpeed: 10
   sideSpeed: 5
   jumpForce: 5
 --- !u!54 &293261907
@@ -744,7 +744,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.14901961, g: 0.22993307, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.14901961, g: 0.4745098, b: 0.36488515, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1425,8 +1425,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelGenerator
   platformPrefab: {fileID: 1909951784887254632}
-  numberOfPlatforms: 20
-  distanceBetween: 6
+  numberOfPlatforms: 16
+  distanceBetween: 8
 --- !u!4 &1462366939
 Transform:
   m_ObjectHideFlags: 0
@@ -1630,7 +1630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1878a49afcc0554abe30ed951cf4f14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelComplete
-  nextLevel: Level2
+  nextLevel: MenuScene
 --- !u!65 &2015440034
 BoxCollider:
   m_ObjectHideFlags: 0

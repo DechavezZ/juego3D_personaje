@@ -1,78 +1,58 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
+using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-    public Slider speedSlider;
+    public float boostAmount = 5f;
+
+    public float boostDuration = 3f;
+
+    private bool boosting = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !boosting)
         {
             PlayerMovement3D player =
                 other.GetComponent<PlayerMovement3D>();
 
             if (player != null)
             {
-                StartCoroutine(Boost(player));
+                StartCoroutine(
+                    Boost(player, other.gameObject)
+                );
             }
         }
     }
 
-    IEnumerator Boost(PlayerMovement3D player)
+    IEnumerator Boost(
+        PlayerMovement3D player,
+        GameObject playerObject
+    )
     {
-        // Guarda velocidad original
+        boosting = true;
+
         float originalSpeed = player.forwardSpeed;
 
-        // Obtiene el renderer del jugador
-        Renderer rend = player.GetComponent<Renderer>();
+        player.forwardSpeed += boostAmount;
 
-        // Cambia color a rojo
+        Renderer rend =
+            playerObject.GetComponent<Renderer>();
+
         if (rend != null)
         {
             rend.material.color = Color.red;
         }
 
-        // Aumenta velocidad
-        player.forwardSpeed *= 2f;
+        yield return new WaitForSeconds(boostDuration);
 
-        // Tiempo del boost
-        float timer = 3f;
-
-        // Configura slider
-        if (speedSlider != null)
-        {
-            speedSlider.maxValue = 3f;
-            speedSlider.value = 3f;
-        }
-
-        // Cuenta regresiva
-        while (timer > 0)
-        {
-            timer -= Time.deltaTime;
-
-            if (speedSlider != null)
-            {
-                speedSlider.value = timer;
-            }
-
-            yield return null;
-        }
-
-        // Regresa velocidad normal
         player.forwardSpeed = originalSpeed;
 
-        // Regresa color normal
         if (rend != null)
         {
             rend.material.color = Color.white;
         }
 
-        // Reinicia slider
-        if (speedSlider != null)
-        {
-            speedSlider.value = 0;
-        }
+        boosting = false;
     }
 }
